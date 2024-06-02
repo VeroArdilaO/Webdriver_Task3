@@ -1,0 +1,19 @@
+{
+  "name": "webdriver-task3",
+  "type": "commonjs",
+  "main": "index.js",
+  "devDependencies": {
+    "@wdio/cli": "^8.38.1",
+    "@wdio/local-runner": "^8.38.0",
+    "@wdio/mocha-framework": "^8.38.0",
+    "@wdio/spec-reporter": "^8.38.0"
+  },
+  "scripts": {
+    "test": "mocha",
+    "wdio": "wdio run src/Config/wdio.config.js"
+  },
+  "dependencies": {
+    "date-fns": "^3.6.0",
+    "mocha": "^10.4.0"
+  }
+}
