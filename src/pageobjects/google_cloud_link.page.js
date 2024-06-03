@@ -1,6 +1,6 @@
-class GoogleSerchPage {
+class GoogleCloudLink {
 
-    get calculatorLink() { return $("//a[contains(@href, 'products/calculator') and contains(@class, 'gs-title')]"); } 
+    get calculatorLink() { return $("//a[contains(@class,'gs-title')]"); } 
 
     async openCalculatorLink() {
         await this.calculatorLink.waitForExist({ timeout: 2000 })
@@ -9,24 +9,5 @@ class GoogleSerchPage {
     }
 }
 
-module.exports = new GoogleSerchPage();
+module.exports = GoogleCloudLink
 
-
-
-
-
-
-
-// class GoogleCloudLink {
-
-//     get Link() { return $("//a[contains(@href, 'products/calculator') and contains(@class, 'gs-title')]") }
-    
-
-//     async openLink() {
-//         await this.Link.waitForExist({ timeout: 2000 })
-//         await this.Link.click()
-//         await browser.pause(500)
-//     }
-// }
-
-// module.exports = GoogleCloudLink;
