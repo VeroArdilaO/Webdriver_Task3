@@ -2,18 +2,24 @@
   "name": "webdriver-task3",
   "type": "commonjs",
   "main": "index.js",
+  "author": "Veronica Ardila",
   "devDependencies": {
     "@wdio/cli": "^8.38.1",
     "@wdio/local-runner": "^8.38.0",
     "@wdio/mocha-framework": "^8.38.0",
-    "@wdio/spec-reporter": "^8.38.0"
+    "@wdio/spec-reporter": "^8.38.0",
+    "cross-env": "^6.0.3"
   },
   "scripts": {
     "test": "mocha",
-    "wdio": "wdio run src/Config/wdio.config.js"
+    "wdio": "wdio run src/Config/wdio.config.js",
+    "wdio:dev": "cross-env NODE_ENV=dev wdio run src/Config/wdio.config.js --suite regression",
+    "wdio:prod": "cross-env NODE_ENV=prod wdio run src/Config/wdio.config.js --suite regression",
+    "wdio:smoke": "cross-env NODE_ENV=dev wdio run src/Config/wdio.config.js --suite smoke"
   },
   "dependencies": {
     "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
     "mocha": "^10.4.0"
   }
 }

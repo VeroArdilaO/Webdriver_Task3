@@ -1,3 +1,7 @@
+const dotenv = require('dotenv');
+const env = process.env.NODE_ENV || 'dev';
+dotenv.config({path: `./.env.${env}`});
+
 exports.config = {
     //
     // ====================
@@ -21,7 +25,7 @@ exports.config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './../test/specs/test3.js'
+        './../test/specs/*.test.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -208,14 +212,20 @@ exports.config = {
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)
      */
-    // beforeHook: function (test, context, hookName) {
-    // },
+    beforeHook: async function (test, context, hookName) {
+        await browser.maximizeWindow();
+    },
     /**
      * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
      * afterEach in Mocha)
      */
     // afterHook: function (test, context, { error, result, duration, passed, retries }, hookName) {
     // },
+
+    suites: {
+        smoke: ['./../test/specs/*.smoke.test.js'],
+        regression: ['./../test/specs/regression.test.js']
+    },
     /**
      * Function to be executed after a test (in Mocha/Jasmine only)
      * @param {object}  test             test object
@@ -226,8 +236,12 @@ exports.config = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+        if (error) {
+            const screenPicture = new Date().toISOString().replace(/:/g, '-');
+            await browser.saveScreenshot(`./screenshots/${screenPicture}.png`);
+        }
+    },
 
 
     /**

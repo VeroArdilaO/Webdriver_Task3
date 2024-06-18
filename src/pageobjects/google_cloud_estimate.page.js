@@ -1,4 +1,8 @@
-const { testdata } = require('../../src/pageobjects/Data/test.data');
+const dotenv = require('dotenv');
+const env = process.env.NODE_ENV || 'dev';
+dotenv.config({path: `./.env.${env}`});
+
+const { testdata } = require(`../../pageobjects/Data/test.${env}`);
 
 class EstimatedPage {
     constructor() {
@@ -40,4 +44,4 @@ class EstimatedPage {
 }
 
 
-module.exports = new EstimatedPage();
+module.exports = EstimatedPage;
